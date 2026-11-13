@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeNova | عالم البرمجة</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="topbar">
+    <a class="logo" href="#" onclick="goHome()">Code<span>Nova</span><b>.</b></a>
+
+    <nav>
+        <button onclick="goHome()">الرئيسية</button>
+        <button onclick="showLanguages()">لغات البرمجة</button>
+        <button onclick="showQuiz()">الاختبارات</button>
+        <button onclick="showEditor()">معمل الأكواد</button>
+    </nav>
+
+    <div class="user-progress">
+        <span>رحلتك التعليمية</span>
+        <strong id="progressText">0 درس مكتمل</strong>
+    </div>
+</header>
+
+<main>
+    <section id="homePage" class="page">
+        <div class="hero">
+            <div class="hero-text">
+                <span class="tag">YOUR CODING JOURNEY STARTS HERE</span>
+                <h1>مش بس تتعلم برمجة..<br><span>اتعلم تصنع بيها!</span></h1>
+                <p>
+                    مرجعك المتكامل لتعلم البرمجة من الصفر حتى بناء المشاريع.
+                    افهم المفاهيم، اكتب الأكواد، اختبر نفسك، وطبّق كل اللي اتعلمته.
+                </p>
+                <button class="main-btn" onclick="showLanguages()">ابدأ رحلة التعلم ←</button>
+            </div>
+
+            <div class="hero-code">
+                <div class="editor-head">my-future.js <span>● ● ●</span></div>
+                <pre><code><span class="purple">const</span> dream = <span class="green">"Developer"</span>;
+
+<span class="purple">function</span> <span class="yellow">learn</span>() {
+  <span class="purple">while</span> (curious) {
+    practice();
+    improve();
+  }
+}
+
+learn();</code></pre>
+                <div class="editor-foot">✦ Every expert was once a beginner</div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span class="tag">LEARNING LIBRARY</span>
+            <h2>اختار اللغة اللي عايز تتعلمها</h2>
+            <p>كل لغة ليها مسار تعليمي منظم من البداية وحتى التطبيق.</p>
+        </div>
+
+        <div id="languageCards" class="language-grid"></div>
+
+        <section class="feature-grid">
+            <article class="feature-card">
+                <span>📚</span>
+                <h3>محتوى تعليمي منظم</h3>
+                <p>فصول ودروس وأمثلة وتطبيقات عملية لكل لغة.</p>
+            </article>
+            <article class="feature-card">
+                <span>💻</span>
+                <h3>اكتب الكود بنفسك</h3>
+                <p>معمل أكواد للتجربة والتعديل ومشاهدة النتيجة.</p>
+            </article>
+            <article class="feature-card">
+                <span>🎯</span>
+                <h3>اختبر مستواك</h3>
+                <p>أسئلة متدرجة من السهل إلى الصعب مع شرح الإجابات.</p>
+            </article>
+        </section>
+    </section>
+
+    <section id="coursePage" class="page hidden">
+        <button class="back-btn" onclick="goHome()">→ العودة للرئيسية</button>
+
+        <div class="course-heading">
+            <div>
+                <span class="tag">COMPLETE LEARNING PATH</span>
+                <h1 id="courseTitle"></h1>
+                <p id="courseDescription"></p>
+            </div>
+            <div class="course-symbol" id="courseSymbol"></div>
+        </div>
+
+        <div class="course-layout">
+            <aside class="chapter-sidebar">
+                <h3>محتويات المسار</h3>
+                <div id="chapterList"></div>
+            </aside>
+
+            <article class="lesson-area">
+                <div class="lesson-meta" id="lessonMeta"></div>
+                <h2 id="lessonTitle">اختار درسًا من القائمة</h2>
+                <div id="lessonContent">
+                    <p>ابدأ باختيار أول فصل من قائمة المحتويات.</p>
+                </div>
+
+                <div class="lesson-actions">
+                    <button class="secondary-btn" onclick="previousLesson()">الدرس السابق</button>
+                    <button class="main-btn" onclick="completeLesson()">أنهيت الدرس ✓</button>
+                    <button class="secondary-btn" onclick="nextLesson()">الدرس التالي ←</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="editorPage" class="page hidden">
+        <button class="back-btn" onclick="goHome()">→ العودة للرئيسية</button>
+        <div class="section-title">
+            <span class="tag">CODING PLAYGROUND</span>
+            <h2>معمل الأكواد</h2>
+            <p>اكتب الكود بنفسك وشوف النتيجة مباشرة.</p>
+        </div>
+
+        <div class="editor-panel">
+            <div class="editor-toolbar">
+                <select id="editorLanguage" onchange="changeEditorLanguage()">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                </select>
+                <button class="main-btn" onclick="runCode()">▶ تشغيل الكود</button>
+                <button class="secondary-btn" onclick="resetCode()">إعادة المثال</button>
+            </div>
+
+            <textarea id="codeInput" spellcheck="false" dir="ltr"></textarea>
+
+            <div class="output-heading">النتيجة</div>
+            <iframe id="codeOutput" title="نتيجة تشغيل الكود"></iframe>
+            <pre id="textOutput"></pre>
+        </div>
+        <p class="editor-note">
+            تنبيه: شغّلي الأكواد الخاصة بك فقط، ولا تضعي معلومات شخصية داخل المحرر.
+        </p>
+    </section>
+
+    <section id="quizPage" class="page hidden">
+        <button class="back-btn" onclick="goHome()">→ العودة للرئيسية</button>
+        <div class="section-title">
+            <span class="tag">TEST YOUR KNOWLEDGE</span>
+            <h2>اختبر مستواك البرمجي</h2>
+            <p>اختاري اللغة والمستوى وابدئي التحدي.</p>
+        </div>
+
+        <div class="quiz-box">
+            <div class="quiz-settings" id="quizSettings">
+                <label>اختاري اللغة</label>
+                <select id="quizLanguage">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                </select>
+
+                <label>اختاري مستوى الأسئلة</label>
+                <select id="quizLevel">
+                    <option value="easy">سهل</option>
+                    <option value="medium">متوسط</option>
+                    <option value="hard">صعب</option>
+                </select>
+
+                <button class="main-btn" onclick="startQuiz()">ابدأ الاختبار</button>
+            </div>
+
+            <div id="quizArea" class="hidden">
+                <div class="quiz-info">
+                    <span id="quizCounter"></span>
+                    <span id="quizScore"></span>
+                </div>
+                <div class="progress-track"><div id="quizProgress"></div></div>
+                <h3 id="quizQuestion"></h3>
+                <div id="quizAnswers" class="quiz-answers"></div>
+                <p id="quizFeedback"></p>
+                <button id="nextQuestionBtn" class="main-btn hidden" onclick="nextQuestion()">السؤال التالي ←</button>
+            </div>
+
+            <div id="quizResult" class="hidden">
+                <h2>انتهى الاختبار! 🎉</h2>
+                <p id="finalScore"></p>
+                <button class="main-btn" onclick="restartQuiz()">اختبار جديد</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <a class="logo" href="#" onclick="goHome()">Code<span>Nova</span><b>.</b></a>
+    <p>تعلّم اليوم، واصنع تكنولوجيا الغد.</p>
+    <small>© 2026 CodeNova</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
